@@ -277,7 +277,7 @@ def process_file_with_claude(uploaded_file):
 
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=50000,
+            max_tokens=32000,
             system=[
                 {
                     "type": "text",
