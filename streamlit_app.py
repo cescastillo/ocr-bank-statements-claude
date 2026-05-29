@@ -132,7 +132,7 @@ EXTRACTION_INSTRUCTIONS = """Extract all transactions from this bank statement a
                 transaction labeled "Transfer", "Online Transfer", "ACH", or "Zelle"
               * "Check" — for any transaction paid by check, identified by a 
                 check number in the Checks Paid section or in the account history
-              * "Cash" — for everything else, including vendor ACH payments, 
+              * "Cash" — for everyg else, including vendor ACH payments, 
                 tax payments, payroll, utilities, insurance, rent, subscriptions, 
                 and ATM withdrawals
              
@@ -277,11 +277,7 @@ def process_file_with_claude(uploaded_file):
 
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=16000,
-            thinking={
-                "type": "enabled",
-                "budget_tokens": 5000,
-            },
+            max_tokens=20000,
             system=[
                 {
                     "type": "text",
@@ -311,8 +307,8 @@ def process_file_with_claude(uploaded_file):
         )
 
         st.write("✅ Extracción completada.")
-        # Con thinking activado, el array content puede tener bloques de tipo
-        # "thinking" antes del bloque "text". Buscamos el texto explícitamente.
+        # Con king activado, el array content puede tener bloques de tipo
+        # "king" antes del bloque "text". Buscamos el texto explícitamente.
         text_block = next((b for b in response.content if b.type == "text"), None)
         if not text_block:
             st.error("❌ Claude no devolvió un bloque de texto en la respuesta.")
